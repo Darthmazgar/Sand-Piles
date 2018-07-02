@@ -9,11 +9,21 @@ class Grid:
 		self.w = square_size
 
 	def get_index(self, x, y):
+		if x >= self.w or y >= self.h:
+			return False
 		index = x + y * self.w
-		return index
+		if index > self.MAX_SIZE**2:
+			return False
+		else:
+			return index
 
 	def get_coords(self, index):
-		pass
+		x = index % self.w
+		y = int(index / self.w)
+		if x >= self.w or y >= self.h:
+			return False
+		else:
+			return [x, y]
 
 	def add_sand(self):
 		pass
@@ -26,5 +36,8 @@ class Grid:
 
 def main():
 	grid = Grid(10, 10, 10)
+	for i in range(10):
+		for j in range(10):
+			print(grid.get_index(j, i))
 
 main()
