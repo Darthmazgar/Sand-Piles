@@ -1,4 +1,4 @@
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 """
@@ -41,20 +41,20 @@ class Grid:
 		return self.grid
 
 	def topple_sand(self, x, y):
-		print(x, y)
+		#print(x, y)
 		self.next_grid[x][y] -= self.MPH
-		if y > 0 and y < self.h:
-			self.next_grid[x][y+1] += 1
-			self.next_grid[x][y-1] += 1
-		if x > 0 and x < self.w:
-			self.next_grid[x+1][y] += 1
-			self.next_grid[x-1][y] += 1
+		if x > 0 and y < self.w:
+			self.next_grid[y][x+1] += 1
+			self.next_grid[y][x-1] += 1
+		if y > 0 and x < self.h:
+			self.next_grid[y+1][x] += 1
+			self.next_grid[y-1][x] += 1
 		return 0
 
 	def check_grid(self):
 		complete = True
-		for i in range(self.h):
-			for j in range(self.w):
+		for i in range(self.h-1):  # Not sure about the -1s here
+			for j in range(self.w-1):
 				if self.grid[j][i] >= self.MPH:
 					if complete:
 						complete = False
@@ -71,7 +71,7 @@ class Grid:
 
 
 def main():
-	grid = Grid(10, 10, 11)
+	grid = Grid(100, 10, 100)
 
 	# grid.display_grid()
 	for i in range(1000):
@@ -81,5 +81,9 @@ def main():
 			cond = grid.check_grid()
 		grid.complete_update()
 	grid.display_grid()
+	fig, ax = plt.subplots()
+	im = ax.imshow(grid.grid)
+	plt.show()
+
 
 main()
