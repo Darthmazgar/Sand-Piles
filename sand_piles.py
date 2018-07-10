@@ -1,10 +1,6 @@
 # import matplotlib.pyplot as plt
 import numpy as np
 
-"""
-Need to thing about current and next grids.
-"""
-
 class Grid:
 	def __init__(self, MAX_SIZE, sand, square_size):
 		self.MAX_SIZE = MAX_SIZE  # Square size, this is a max side size
@@ -83,8 +79,5 @@ def main():
 	grid = Grid(10, 20, 9)
 	grid.add_all_sand()
 	grid.display_grid()
-
-
-
 
 main()
