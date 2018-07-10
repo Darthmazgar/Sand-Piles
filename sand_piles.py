@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 """
@@ -69,21 +69,22 @@ class Grid:
 		print(self.grid)
 		return 0
 
+	def add_all_sand(self):
+		for i in range(self.sc):
+			self.add_sand()
+			cond = False
+			while not cond:
+				cond = self.check_grid()
+			self.complete_update()
+		return 0
+
 
 def main():
-	grid = Grid(100, 10, 100)
-
-	# grid.display_grid()
-	for i in range(1000):
-		grid.add_sand()
-		cond = False
-		while not cond:
-			cond = grid.check_grid()
-		grid.complete_update()
+	grid = Grid(10, 20, 9)
+	grid.add_all_sand()
 	grid.display_grid()
-	fig, ax = plt.subplots()
-	im = ax.imshow(grid.grid)
-	plt.show()
+
+
 
 
 main()
