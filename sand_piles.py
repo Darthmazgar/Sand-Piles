@@ -1,4 +1,4 @@
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 class Grid:
@@ -39,10 +39,10 @@ class Grid:
 	def topple_sand(self, x, y):
 		#print(x, y)
 		self.next_grid[x][y] -= self.MPH
-		if x > 0 and y < self.w:
+		if x >= 0 and y < self.w:
 			self.next_grid[y][x+1] += 1
 			self.next_grid[y][x-1] += 1
-		if y > 0 and x < self.h:
+		if y >= 0 and x < self.h:
 			self.next_grid[y+1][x] += 1
 			self.next_grid[y-1][x] += 1
 		return 0
@@ -74,10 +74,16 @@ class Grid:
 			self.complete_update()
 		return 0
 
+	def heat_map(self):
+		plt.imshow(self.grid, cmap='Blues', interpolation='nearest')
+		plt.show()
+		return 0
+
 
 def main():
-	grid = Grid(10, 20, 9)
+	grid = Grid(100, 100000, 100)
 	grid.add_all_sand()
-	grid.display_grid()
+	# grid.display_grid()
+	grid.heat_map()
 
 main()
