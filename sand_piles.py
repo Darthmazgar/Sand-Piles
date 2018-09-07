@@ -90,3 +90,6 @@ def main():
     grid.heat_map()
 
 main()
+
+
+"""Checking how to commist and push using pycharm"""
