@@ -48,6 +48,7 @@ class SandPiles:
                                 choice = np.random.choice(choices)
                                 choice += 1
 
+
             if cnt == 0:
                 all_toppled = True
 
