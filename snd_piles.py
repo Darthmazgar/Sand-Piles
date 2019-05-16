@@ -38,7 +38,7 @@ class SandPiles:
                             self.grid[(i-1) % self.N][(j+1) % self.N] += 1
                             self.grid[(i-1) % self.N][(j-1) % self.N] += 1
                             self.grid[i][(j+1) % self.N] += 1
-                            self.grid[i][(j-1) % self.N] += 1  
+                            self.grid[i][(j-1) % self.N] += 1
                     else:
                         if self.grid[i][j] >= self.MPH:
                             original = self.grid[i][j]
@@ -48,8 +48,6 @@ class SandPiles:
                                 self.grid[i][j] -= 1
                                 choice = np.random.choice(choices)
                                 choice += 1
-
-
             if cnt == 0:
                 all_toppled = True
 
@@ -90,7 +88,7 @@ class SandPiles:
         plt.show()
 
 def main():
-    s = SandPiles(50)
+    s = SandPiles(500)
     s.run_animation()
 
 if __name__ == '__main__':
