@@ -1,15 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 class Grid:
     def __init__(self, MAX_SIZE, sand, square_size):
         self.MAX_SIZE = MAX_SIZE  # Square size, this is a max side size
         self.sc = sand
         self.h = square_size
         self.w = square_size
-        self.MPH = 4  # Max pile height
+        self.MPH = 4 # Max pile height
         self.grid = np.zeros([self.w, self.h])
-        self.next_grid = self.grid
+        self.next_grid = self.grid.copy()
 
     def get_index(self, x, y):
         if x >= self.w or y >= self.h:
@@ -38,12 +39,16 @@ class Grid:
 
     def topple_sand(self, x, y):
         self.next_grid[x][y] -= self.MPH
-        if x >= 0 and y < self.w:
-            self.next_grid[y][x+1] += 1
-            self.next_grid[y][x-1] += 1
-        if y >= 0 and x < self.h:
-            self.next_grid[y+1][x] += 1
-            self.next_grid[y-1][x] += 1
+        self.next_grid[y][x + 1] += 1
+        self.next_grid[y][x-1] += 1
+        self.next_grid[y + 1][x] += 1
+        self.next_grid[y-1][x] += 1
+        # if x >= 0 and y < self.w:
+        #     self.next_grid[y][x+1] += 1
+        #     self.next_grid[y][x-1] += 1
+        # if y >= 0 and x < self.h:
+        #     self.next_grid[y+1][x] += 1
+        #     self.next_grid[y-1][x] += 1
         return 0
 
     def check_grid(self):
@@ -54,14 +59,16 @@ class Grid:
                     if complete:
                         complete = False
                     self.topple_sand(j, i)
-                    if self.grid[j][i] >= self.MPH:
-                        print(self.grid[j][i])
-
+                    # if self.grid[j][i] >= self.MPH:
+                        # print(self.grid[j][i])
 
         return complete
 
+    def edge_detect(self):
+        pass
+
     def complete_update(self):
-        self.grid = self.next_grid
+        self.grid = self.next_grid.copy()
         return 0
 
     def display_grid(self):
@@ -84,11 +91,9 @@ class Grid:
 
 
 def main():
-    grid = Grid(100, 500, 10)
+    grid = Grid(10, 5, 10)
     grid.add_all_sand()
     grid.display_grid()
     grid.heat_map()
 
 main()
-
-
