@@ -10,8 +10,8 @@ class SandPiles:
         self.N = N
         self.grid = np.zeros((N,N))
         self.animation = True
-        self.grains_per_update = 1
-        self.MPH = 3
+        self.grains_per_update = 100
+        self.MPH = 4
 
     def topple_towers(self):
         all_toppled = False
@@ -42,7 +42,8 @@ class SandPiles:
                     else:
                         if self.grid[i][j] >= self.MPH:
                             original = self.grid[i][j]
-                            choices = np.array([self.grid[(i+1) % self.N][j], self.grid[(i-1) % self.N][j], self.grid[i][(j+1) % self.N], self.grid[i][(j-1) % self.N]])
+                            choices = np.array([self.grid[(i+1) % self.N][j], self.grid[(i-1) % self.N][j],\
+                                 self.grid[i][(j+1) % self.N], self.grid[i][(j-1) % self.N]])
                             while original - self.MPH <= self.grid[i][j]:
                                 self.grid[i][j] -= 1
                                 choice = np.random.choice(choices)
